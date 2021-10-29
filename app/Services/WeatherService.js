@@ -7,7 +7,8 @@ class weatherService {
   async getWeather() {
     const res = await sandBoxApi.get('weather')
     ProxyState.weather = res.data
-    const template = weather.weatherTemplate
+    const template = ProxyState.weather.weatherTemplate
+    //I've tried so many different things to get this damn template on the page, I've completely run out of ideas. 
     // const weather = new Weather(ProxyState.weather)
   }
 }

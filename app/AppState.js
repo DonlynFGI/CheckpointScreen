@@ -6,6 +6,7 @@ class AppState extends EventEmitter {
   values = []
   /** @type {import('./Models/weather').Weather} */
   weather = null
+  weatherTemplate = ''
 }
 
 export const ProxyState = new Proxy(new AppState(), {

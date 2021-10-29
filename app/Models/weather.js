@@ -12,3 +12,5 @@ export class Weather {
     return `<div class="card bg-light text-center" > Weather: temperature: ${this.temp} Pressure: ${this.pressure} humidity: ${this.humidity} WindSpeed: ${this.windspeed} Its ${this.cast} outside!</div>`
   }
 }
+
+//this entire file is either 100% wrong, or 100% ignored. I still haven't figured out which. I assume the latter over the former, it looks legit.
