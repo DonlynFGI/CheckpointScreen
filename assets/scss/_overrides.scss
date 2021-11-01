@@ -1,0 +1,8 @@
+.hide{
+  display:none;
+}
+
+.hoverdiv:hover + .hide {
+  display:block !important;
+  color:blue;
+}

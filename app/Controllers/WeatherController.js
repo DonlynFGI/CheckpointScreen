@@ -6,7 +6,7 @@ function _drawWeather(data) {
   let weather = ProxyState.weather
   const template = ProxyState.weatherTemplate
   //I know this logic looks weird as hell, and that's entirely because I've tried around nine different times to get it to pull the template and set it to the innerhtml of the page's item at id "weather". I've been taking wild guesses for the last three or four tries. Maybe I just don't understand mvc as well as I thought I did?
-  document.getElementById('weather').innerHTML = template
+  document.getElementById('weather').innerHTML = weather.weatherTemplate
 }
 //I can't figure out why nothing is working, I have about an hour left to finish this entire app. FML
 export class WeatherController {
@@ -24,4 +24,8 @@ export class WeatherController {
     }
 
   }
+}
+
+function toggleweather() {
+  document.getElementById('wthr').innerText = `Temperature: ${this.tempcel}`
 }
