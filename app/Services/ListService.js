@@ -24,7 +24,7 @@ class listService {
   }
 
   async deleteTodo(id) {
-    const todo = ProxyState.list.find(l => l.id == id)
+    const todo = ProxyState.todos.find(l => l.id == id)
     await sandBoxApi.delete('Don/todos/' + `${todo.id}`)
     ProxyState.todos = ProxyState.todos.filter(todo => todo.id != id)
   }
