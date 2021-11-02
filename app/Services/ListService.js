@@ -1,5 +1,5 @@
 import { ProxyState } from "../AppState.js";
-import { List } from "../Models/list.js";
+import { List } from "../Models/List.js";
 import { sandBoxApi } from "./AxiosService.js";
 
 class listService {
