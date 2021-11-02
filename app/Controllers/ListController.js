@@ -2,19 +2,31 @@ import { ProxyState } from "../AppState.js";
 import { ListService } from "../Services/ListService.js";
 
 function _drawList(data) {
-  let list = ProxyState.list
-  const template = ProxyState.listTemplate
-  //I know this logic looks weird as hell, and that's entirely because I've tried around nine different times to get it to pull the template and set it to the innerhtml of the page's item at id "weather". I've been taking wild guesses for the last three or four tries. Maybe I just don't understand mvc as well as I thought I did?
-  document.getElementById('list').innerHTML = list.listTemplate
+  let list = ProxyState.todos
+  let CompletedTodos = list.filter(l => l.completed).length
+  let template = `<div>${CompletedTodos}/${list.length}</div>`
+  list.forEach(todo => template += `<p><input id="completed" onclick="app.listController.completed('${todo.id}')" type="checkbox"${todo.completed ? 'checked' : ''}>${todo.description}</p><button onclick="app.listController.deleteTodo('${todo.id}')">Del</button>`)
+  document.getElementById('listitems').innerHTML = template
+  list.forEach(l => template += `
+  <p class="m-1 selectable" onclick="app.listController.completed('${l.id}')">
+    ${l.name} ${l.completed ? '<i class="text-info mdi mdi-book"></i>' : ''}
+  </p>
+  `)
 }
-//I can't figure out why nothing is working, I have about an hour left to finish this entire app. FML
 export class ListController {
   constructor() {
     this.getList()
-    //One good thing that happened is that right here where I register a listener for anytime 'weather' changes, it actually does draw changes made. problem is, nothing ever really changes as it always comes back undefined. Definitely something to do with the template not being accepted. 
     ProxyState.on('todos', _drawList)
   }
 
+  async create() {
+    window.event.preventDefault()
+    const formElem = window.event.target
+    const listData = {
+      description: formElem.currentlist.value,
+    }
+    await ListService.create(listData)
+  }
   async getList() {
     try {
       await ListService.getList()
@@ -23,5 +35,26 @@ export class ListController {
     }
 
   }
+
+  async completed(id) {
+    try {
+      await ListService.complete(id)
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async deleteTodo(id) {
+    try {
+      if (window.confirm('Are you sure you want to delete this?')) {
+        window.event.preventDefault()
+        await ListService.deleteTodo(id)
+      }
+    } catch (error) {
+      console.error("[DELETE ERROR]", error.message)
+    }
+  }
 }
-//so like none of these have anything in them, because I ran out of time to work on this before I even got the weather working.
+
+

@@ -9,7 +9,7 @@ class App {
   // valuesController = new ValuesController();
   weatherController = new WeatherController();
   quoteController = new QuoteController();
-  // listController = new ListController();
+  listController = new ListController();
   imageController = new ImageController();
   clockController = new ClockController()
 }

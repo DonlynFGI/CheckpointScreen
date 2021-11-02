@@ -33,7 +33,14 @@
               <div id="clock"></div>
               <div id="weather"></div>
               <div id="quote"></div>
-              <div id="list"></div>
+              <div id="list">
+                <div class="card">
+                  <form onsubmit="app.listController.create()">
+                    <input id="AddItemList" name="currentlist" type="text">
+                  </form>
+                  <div id="listitems"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
